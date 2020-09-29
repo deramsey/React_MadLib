@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" integrity="sha512-kp7YHLxuJDJcOzStgd6vtpxr4ZU9kjn77e6dBsivSz+pUuAuMlE2UTdKB7jjsWT84qbS8kdCWHPETnP/ctrFsA==" crossorigin="anonymous"></script>  
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>   
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>  
+        
+        <style type="text/css">
+        *{
+            font-family: sans-serif;
+            font-size: 1em;
+        }
+        form{
+            width: 50vw;
+            margin: 0 auto;
+        }
+
+        input[type="text"]{
+            width: 100%;
+            height: 32px;
+            margin-bottom: 16px;
+                    }
+
+        button {
+            width: 100%;
+            height: 32px;
+            background-color: #ff8811;
+        }
+
+        button:hover{
+            background-color: #aa5500;
+            font-weight: bold;
+            text-decoration: underline;
+            color: white;
+        }
+
+        #output {
+            font-size: 1.2em;
+            width: 50vw;
+            margin: 0 auto;
+        }
+        </style>
+
+    </head>
+
+    <body>
+
+        <div id="root"></div>
+        <div id="output"></div>
+
+
+        
+        <script type="text/babel">
+
+        let madlibData = {
+            vrb: '',
+            anim: '',
+            color:'',
+            yname: '',
+            adj: ''
+
+        }
+
+        class MadlibInput extends React.Component {
+
+            submitInfo = (e)=> {
+            
+            madlibData.vrb = document.querySelector("#vrb").value;
+            madlibData.anim = document.querySelector("#anim").value;
+            madlibData.color = document.querySelector("#color").value;
+            madlibData.yname = document.querySelector("#yname").value;
+            madlibData.adj = document.querySelector("#adj").value;
+
+            document.querySelector("#root").style.display = "none";
+
+            document.querySelector("#output").innerHTML = '<p>One day, as I was taking a ' + madlibData.vrb + ', I saw a ' + madlibData.anim + ' looking back at me. Strangely, it was wearing a ' + madlibData.color + ' hat. I said to myself, "You know, ' + madlibData.yname + ', you\'d look ' + madlibData.adj + ' in a hat like that."</p>'
+
+            e.preventDefault();
+        }
+
+        render(){
+            return <form>
+                         <input type="text" name="vrb" id="vrb" placeholder="Verb" />  <br />
+                         <input type="text" name="anim" id="anim" placeholder="Animal" />  <br />  
+                         <input type="text" name="color" id="color" placeholder="Color" />  <br />  
+                         <input type="text" name="yname" id="yname" placeholder="Your Name" />  <br />  
+                         <input type="text" name="adj" id="adj" placeholder="Adjective" />  <br />
+                         <button id="submit" onClick={this.submitInfo}> Generate MadLib </button>
+                </form>
+        }
+        }
+
+
+        ReactDOM.render(<MadlibInput />, document.getElementById("root"));
+
+        </script>
+    </body>
+</html>
